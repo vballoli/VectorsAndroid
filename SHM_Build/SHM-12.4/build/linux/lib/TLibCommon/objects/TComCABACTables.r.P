@@ -1,0 +1,11 @@
+./objects/TComCABACTables.r.o: \
+  /home/balli/Coding/Java/project-stuff/trial1/SHM-12.4/build/linux/lib/TLibCommon/../../../../source/Lib/TLibCommon/TComCABACTables.cpp \
+  ../../../../source/Lib/TLibCommon/TComCABACTables.h \
+  /home/balli/Coding/Java/project-stuff/trial1/SHM-12.4/build/linux/lib/TLibCommon/../../../../source/Lib/TLibCommon/CommonDef.h \
+  ../../../../source/Lib/TLibCommon/TypeDef.h \
+  /home/balli/Coding/Java/project-stuff/trial1/SHM-12.4/build/linux/lib/TLibCommon/../../../../source/Lib/TLibCommon/TComRom.h
+  /home/balli/Coding/Java/project-stuff/trial1/SHM-12.4/build/linux/lib/TLibCommon/../../../../source/Lib/TLibCommon/TComCABACTables.cpp :
+  ../../../../source/Lib/TLibCommon/TComCABACTables.h :
+  /home/balli/Coding/Java/project-stuff/trial1/SHM-12.4/build/linux/lib/TLibCommon/../../../../source/Lib/TLibCommon/CommonDef.h :
+  ../../../../source/Lib/TLibCommon/TypeDef.h :
+  /home/balli/Coding/Java/project-stuff/trial1/SHM-12.4/build/linux/lib/TLibCommon/../../../../source/Lib/TLibCommon/TComRom.h :

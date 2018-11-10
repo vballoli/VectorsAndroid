@@ -1,0 +1,23 @@
+./objects/SyntaxElementParser.r.o: \
+  /home/balli/Coding/Java/project-stuff/trial1/SHM-12.4/build/linux/lib/TLibDecoderAnalyser/../../../../source/Lib/TLibDecoder/SyntaxElementParser.cpp \
+  /home/balli/Coding/Java/project-stuff/trial1/SHM-12.4/build/linux/lib/TLibDecoderAnalyser/../../../../source/Lib/TLibCommon/CommonDef.h \
+  /home/balli/Coding/Java/project-stuff/trial1/SHM-12.4/build/linux/lib/TLibDecoderAnalyser/../../../../source/Lib/TLibCommon/TypeDef.h \
+  /home/balli/Coding/Java/project-stuff/trial1/SHM-12.4/build/linux/lib/TLibDecoderAnalyser/../../../../source/Lib/TLibCommon/TComRom.h \
+  /home/balli/Coding/Java/project-stuff/trial1/SHM-12.4/build/linux/lib/TLibDecoderAnalyser/../../../../source/Lib/TLibCommon/TComBitStream.h \
+  ../../../../source/Lib/TLibDecoder/SyntaxElementParser.h \
+  /home/balli/Coding/Java/project-stuff/trial1/SHM-12.4/build/linux/lib/TLibDecoderAnalyser/../../../../source/Lib/TLibCommon/TComCodingStatistics.h \
+  /home/balli/Coding/Java/project-stuff/trial1/SHM-12.4/build/linux/lib/TLibDecoderAnalyser/../../../../source/Lib/TLibCommon/TComChromaFormat.h \
+  /home/balli/Coding/Java/project-stuff/trial1/SHM-12.4/build/linux/lib/TLibDecoderAnalyser/../../../../source/Lib/TLibCommon/TComRectangle.h \
+  /home/balli/Coding/Java/project-stuff/trial1/SHM-12.4/build/linux/lib/TLibDecoderAnalyser/../../../../source/Lib/TLibCommon/ContextTables.h \
+  /home/balli/Coding/Java/project-stuff/trial1/SHM-12.4/build/linux/lib/TLibDecoderAnalyser/../../../../source/Lib/TLibCommon/Debug.h
+  /home/balli/Coding/Java/project-stuff/trial1/SHM-12.4/build/linux/lib/TLibDecoderAnalyser/../../../../source/Lib/TLibDecoder/SyntaxElementParser.cpp :
+  /home/balli/Coding/Java/project-stuff/trial1/SHM-12.4/build/linux/lib/TLibDecoderAnalyser/../../../../source/Lib/TLibCommon/CommonDef.h :
+  /home/balli/Coding/Java/project-stuff/trial1/SHM-12.4/build/linux/lib/TLibDecoderAnalyser/../../../../source/Lib/TLibCommon/TypeDef.h :
+  /home/balli/Coding/Java/project-stuff/trial1/SHM-12.4/build/linux/lib/TLibDecoderAnalyser/../../../../source/Lib/TLibCommon/TComRom.h :
+  /home/balli/Coding/Java/project-stuff/trial1/SHM-12.4/build/linux/lib/TLibDecoderAnalyser/../../../../source/Lib/TLibCommon/TComBitStream.h :
+  ../../../../source/Lib/TLibDecoder/SyntaxElementParser.h :
+  /home/balli/Coding/Java/project-stuff/trial1/SHM-12.4/build/linux/lib/TLibDecoderAnalyser/../../../../source/Lib/TLibCommon/TComCodingStatistics.h :
+  /home/balli/Coding/Java/project-stuff/trial1/SHM-12.4/build/linux/lib/TLibDecoderAnalyser/../../../../source/Lib/TLibCommon/TComChromaFormat.h :
+  /home/balli/Coding/Java/project-stuff/trial1/SHM-12.4/build/linux/lib/TLibDecoderAnalyser/../../../../source/Lib/TLibCommon/TComRectangle.h :
+  /home/balli/Coding/Java/project-stuff/trial1/SHM-12.4/build/linux/lib/TLibDecoderAnalyser/../../../../source/Lib/TLibCommon/ContextTables.h :
+  /home/balli/Coding/Java/project-stuff/trial1/SHM-12.4/build/linux/lib/TLibDecoderAnalyser/../../../../source/Lib/TLibCommon/Debug.h :

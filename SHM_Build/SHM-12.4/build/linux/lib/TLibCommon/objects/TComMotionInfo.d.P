@@ -1,0 +1,11 @@
+./objects/TComMotionInfo.d.o: \
+  /home/balli/Coding/Java/project-stuff/trial1/SHM-12.4/build/linux/lib/TLibCommon/../../../../source/Lib/TLibCommon/TComMotionInfo.cpp \
+  ../../../../source/Lib/TLibCommon/TComMotionInfo.h \
+  ../../../../source/Lib/TLibCommon/CommonDef.h \
+  ../../../../source/Lib/TLibCommon/TypeDef.h \
+  ../../../../source/Lib/TLibCommon/TComMv.h
+  /home/balli/Coding/Java/project-stuff/trial1/SHM-12.4/build/linux/lib/TLibCommon/../../../../source/Lib/TLibCommon/TComMotionInfo.cpp :
+  ../../../../source/Lib/TLibCommon/TComMotionInfo.h :
+  ../../../../source/Lib/TLibCommon/CommonDef.h :
+  ../../../../source/Lib/TLibCommon/TypeDef.h :
+  ../../../../source/Lib/TLibCommon/TComMv.h :

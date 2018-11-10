@@ -1,0 +1,9 @@
+./objects/TAppDownConvert.r.o: \
+  /home/balli/Coding/Java/project-stuff/trial1/SHM-12.4/build/linux/app/TAppDownConvert/../../../../source/App/TAppDownConvert/TAppDownConvert.cpp \
+  ../../../../source/App/TAppDownConvert/DownConvert.h \
+  ../../../../source/App/TAppDownConvert/../../Lib/TLibCommon/CommonDef.h \
+  ../../../../source/App/TAppDownConvert/../../Lib/TLibCommon/TypeDef.h
+  /home/balli/Coding/Java/project-stuff/trial1/SHM-12.4/build/linux/app/TAppDownConvert/../../../../source/App/TAppDownConvert/TAppDownConvert.cpp :
+  ../../../../source/App/TAppDownConvert/DownConvert.h :
+  ../../../../source/App/TAppDownConvert/../../Lib/TLibCommon/CommonDef.h :
+  ../../../../source/App/TAppDownConvert/../../Lib/TLibCommon/TypeDef.h :

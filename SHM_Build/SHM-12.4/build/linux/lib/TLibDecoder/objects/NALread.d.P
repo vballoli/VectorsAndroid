@@ -1,0 +1,13 @@
+./objects/NALread.d.o: \
+  /home/balli/Coding/Java/project-stuff/trial1/SHM-12.4/build/linux/lib/TLibDecoder/../../../../source/Lib/TLibDecoder/NALread.cpp \
+  ../../../../source/Lib/TLibDecoder/NALread.h \
+  /home/balli/Coding/Java/project-stuff/trial1/SHM-12.4/build/linux/lib/TLibDecoder/../../../../source/Lib/TLibCommon/CommonDef.h \
+  /home/balli/Coding/Java/project-stuff/trial1/SHM-12.4/build/linux/lib/TLibDecoder/../../../../source/Lib/TLibCommon/TypeDef.h \
+  /home/balli/Coding/Java/project-stuff/trial1/SHM-12.4/build/linux/lib/TLibDecoder/../../../../source/Lib/TLibCommon/TComBitStream.h \
+  /home/balli/Coding/Java/project-stuff/trial1/SHM-12.4/build/linux/lib/TLibDecoder/../../../../source/Lib/TLibCommon/NAL.h
+  /home/balli/Coding/Java/project-stuff/trial1/SHM-12.4/build/linux/lib/TLibDecoder/../../../../source/Lib/TLibDecoder/NALread.cpp :
+  ../../../../source/Lib/TLibDecoder/NALread.h :
+  /home/balli/Coding/Java/project-stuff/trial1/SHM-12.4/build/linux/lib/TLibDecoder/../../../../source/Lib/TLibCommon/CommonDef.h :
+  /home/balli/Coding/Java/project-stuff/trial1/SHM-12.4/build/linux/lib/TLibDecoder/../../../../source/Lib/TLibCommon/TypeDef.h :
+  /home/balli/Coding/Java/project-stuff/trial1/SHM-12.4/build/linux/lib/TLibDecoder/../../../../source/Lib/TLibCommon/TComBitStream.h :
+  /home/balli/Coding/Java/project-stuff/trial1/SHM-12.4/build/linux/lib/TLibDecoder/../../../../source/Lib/TLibCommon/NAL.h :

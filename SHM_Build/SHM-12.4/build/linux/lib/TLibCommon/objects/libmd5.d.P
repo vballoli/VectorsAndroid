@@ -1,0 +1,5 @@
+./objects/libmd5.d.o: \
+  /home/balli/Coding/Java/project-stuff/trial1/SHM-12.4/build/linux/lib/TLibCommon/../../../../source/Lib/libmd5/libmd5.c \
+  /home/balli/Coding/Java/project-stuff/trial1/SHM-12.4/build/linux/lib/TLibCommon/../../../../source/Lib/libmd5/libmd5.h
+  /home/balli/Coding/Java/project-stuff/trial1/SHM-12.4/build/linux/lib/TLibCommon/../../../../source/Lib/libmd5/libmd5.c :
+  /home/balli/Coding/Java/project-stuff/trial1/SHM-12.4/build/linux/lib/TLibCommon/../../../../source/Lib/libmd5/libmd5.h :

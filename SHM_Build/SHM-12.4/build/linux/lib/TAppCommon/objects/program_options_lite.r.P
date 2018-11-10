@@ -1,0 +1,5 @@
+./objects/program_options_lite.r.o: \
+  /home/balli/Coding/Java/project-stuff/trial1/SHM-12.4/build/linux/lib/TAppCommon/../../../../source/Lib/TAppCommon/program_options_lite.cpp \
+  ../../../../source/Lib/TAppCommon/program_options_lite.h
+  /home/balli/Coding/Java/project-stuff/trial1/SHM-12.4/build/linux/lib/TAppCommon/../../../../source/Lib/TAppCommon/program_options_lite.cpp :
+  ../../../../source/Lib/TAppCommon/program_options_lite.h :

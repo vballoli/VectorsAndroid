@@ -1,0 +1,29 @@
+./objects/TAppEncLayerCfg.d.o: \
+  /home/balli/Coding/Java/project-stuff/trial1/SHM-12.4/build/linux/app/TAppEncoder/../../../../source/App/TAppEncoder/TAppEncLayerCfg.cpp \
+  /home/balli/Coding/Java/project-stuff/trial1/SHM-12.4/build/linux/app/TAppEncoder/../../../../source/Lib/TLibCommon/TComRom.h \
+  /home/balli/Coding/Java/project-stuff/trial1/SHM-12.4/build/linux/app/TAppEncoder/../../../../source/Lib/TLibCommon/CommonDef.h \
+  /home/balli/Coding/Java/project-stuff/trial1/SHM-12.4/build/linux/app/TAppEncoder/../../../../source/Lib/TLibCommon/TypeDef.h \
+  ../../../../source/App/TAppEncoder/TAppEncCfg.h \
+  /home/balli/Coding/Java/project-stuff/trial1/SHM-12.4/build/linux/app/TAppEncoder/../../../../source/Lib/TLibEncoder/TEncCfg.h \
+  /home/balli/Coding/Java/project-stuff/trial1/SHM-12.4/build/linux/app/TAppEncoder/../../../../source/Lib/TLibCommon/TComSlice.h \
+  /home/balli/Coding/Java/project-stuff/trial1/SHM-12.4/build/linux/app/TAppEncoder/../../../../source/Lib/TLibCommon/TComList.h \
+  /home/balli/Coding/Java/project-stuff/trial1/SHM-12.4/build/linux/app/TAppEncoder/../../../../source/Lib/TLibCommon/TComChromaFormat.h \
+  /home/balli/Coding/Java/project-stuff/trial1/SHM-12.4/build/linux/app/TAppEncoder/../../../../source/Lib/TLibCommon/TComRectangle.h \
+  /home/balli/Coding/Java/project-stuff/trial1/SHM-12.4/build/linux/app/TAppEncoder/../../../../source/Lib/TLibCommon/ContextTables.h \
+  /home/balli/Coding/Java/project-stuff/trial1/SHM-12.4/build/linux/app/TAppEncoder/../../../../source/Lib/TLibCommon/Debug.h \
+  ../../../../source/App/TAppEncoder/TAppEncLayerCfg.h \
+  /home/balli/Coding/Java/project-stuff/trial1/SHM-12.4/build/linux/app/TAppEncoder/../../../../source/Lib/TAppCommon/program_options_lite.h
+  /home/balli/Coding/Java/project-stuff/trial1/SHM-12.4/build/linux/app/TAppEncoder/../../../../source/App/TAppEncoder/TAppEncLayerCfg.cpp :
+  /home/balli/Coding/Java/project-stuff/trial1/SHM-12.4/build/linux/app/TAppEncoder/../../../../source/Lib/TLibCommon/TComRom.h :
+  /home/balli/Coding/Java/project-stuff/trial1/SHM-12.4/build/linux/app/TAppEncoder/../../../../source/Lib/TLibCommon/CommonDef.h :
+  /home/balli/Coding/Java/project-stuff/trial1/SHM-12.4/build/linux/app/TAppEncoder/../../../../source/Lib/TLibCommon/TypeDef.h :
+  ../../../../source/App/TAppEncoder/TAppEncCfg.h :
+  /home/balli/Coding/Java/project-stuff/trial1/SHM-12.4/build/linux/app/TAppEncoder/../../../../source/Lib/TLibEncoder/TEncCfg.h :
+  /home/balli/Coding/Java/project-stuff/trial1/SHM-12.4/build/linux/app/TAppEncoder/../../../../source/Lib/TLibCommon/TComSlice.h :
+  /home/balli/Coding/Java/project-stuff/trial1/SHM-12.4/build/linux/app/TAppEncoder/../../../../source/Lib/TLibCommon/TComList.h :
+  /home/balli/Coding/Java/project-stuff/trial1/SHM-12.4/build/linux/app/TAppEncoder/../../../../source/Lib/TLibCommon/TComChromaFormat.h :
+  /home/balli/Coding/Java/project-stuff/trial1/SHM-12.4/build/linux/app/TAppEncoder/../../../../source/Lib/TLibCommon/TComRectangle.h :
+  /home/balli/Coding/Java/project-stuff/trial1/SHM-12.4/build/linux/app/TAppEncoder/../../../../source/Lib/TLibCommon/ContextTables.h :
+  /home/balli/Coding/Java/project-stuff/trial1/SHM-12.4/build/linux/app/TAppEncoder/../../../../source/Lib/TLibCommon/Debug.h :
+  ../../../../source/App/TAppEncoder/TAppEncLayerCfg.h :
+  /home/balli/Coding/Java/project-stuff/trial1/SHM-12.4/build/linux/app/TAppEncoder/../../../../source/Lib/TAppCommon/program_options_lite.h :

@@ -1,0 +1,21 @@
+./objects/TAppDecCfg.d.o: \
+  /home/balli/Coding/Java/project-stuff/trial1/SHM-12.4/build/linux/app/TAppDecoder/../../../../source/App/TAppDecoder/TAppDecCfg.cpp \
+  ../../../../source/App/TAppDecoder/TAppDecCfg.h \
+  /home/balli/Coding/Java/project-stuff/trial1/SHM-12.4/build/linux/app/TAppDecoder/../../../../source/Lib/TLibCommon/CommonDef.h \
+  /home/balli/Coding/Java/project-stuff/trial1/SHM-12.4/build/linux/app/TAppDecoder/../../../../source/Lib/TLibCommon/TypeDef.h \
+  /home/balli/Coding/Java/project-stuff/trial1/SHM-12.4/build/linux/app/TAppDecoder/../../../../source/Lib/TAppCommon/program_options_lite.h \
+  /home/balli/Coding/Java/project-stuff/trial1/SHM-12.4/build/linux/app/TAppDecoder/../../../../source/Lib/TLibCommon/TComChromaFormat.h \
+  /home/balli/Coding/Java/project-stuff/trial1/SHM-12.4/build/linux/app/TAppDecoder/../../../../source/Lib/TLibCommon/TComRectangle.h \
+  /home/balli/Coding/Java/project-stuff/trial1/SHM-12.4/build/linux/app/TAppDecoder/../../../../source/Lib/TLibCommon/ContextTables.h \
+  /home/balli/Coding/Java/project-stuff/trial1/SHM-12.4/build/linux/app/TAppDecoder/../../../../source/Lib/TLibCommon/TComRom.h \
+  /home/balli/Coding/Java/project-stuff/trial1/SHM-12.4/build/linux/app/TAppDecoder/../../../../source/Lib/TLibCommon/Debug.h
+  /home/balli/Coding/Java/project-stuff/trial1/SHM-12.4/build/linux/app/TAppDecoder/../../../../source/App/TAppDecoder/TAppDecCfg.cpp :
+  ../../../../source/App/TAppDecoder/TAppDecCfg.h :
+  /home/balli/Coding/Java/project-stuff/trial1/SHM-12.4/build/linux/app/TAppDecoder/../../../../source/Lib/TLibCommon/CommonDef.h :
+  /home/balli/Coding/Java/project-stuff/trial1/SHM-12.4/build/linux/app/TAppDecoder/../../../../source/Lib/TLibCommon/TypeDef.h :
+  /home/balli/Coding/Java/project-stuff/trial1/SHM-12.4/build/linux/app/TAppDecoder/../../../../source/Lib/TAppCommon/program_options_lite.h :
+  /home/balli/Coding/Java/project-stuff/trial1/SHM-12.4/build/linux/app/TAppDecoder/../../../../source/Lib/TLibCommon/TComChromaFormat.h :
+  /home/balli/Coding/Java/project-stuff/trial1/SHM-12.4/build/linux/app/TAppDecoder/../../../../source/Lib/TLibCommon/TComRectangle.h :
+  /home/balli/Coding/Java/project-stuff/trial1/SHM-12.4/build/linux/app/TAppDecoder/../../../../source/Lib/TLibCommon/ContextTables.h :
+  /home/balli/Coding/Java/project-stuff/trial1/SHM-12.4/build/linux/app/TAppDecoder/../../../../source/Lib/TLibCommon/TComRom.h :
+  /home/balli/Coding/Java/project-stuff/trial1/SHM-12.4/build/linux/app/TAppDecoder/../../../../source/Lib/TLibCommon/Debug.h :

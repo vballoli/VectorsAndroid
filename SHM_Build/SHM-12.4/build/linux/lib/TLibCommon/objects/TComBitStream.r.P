@@ -1,0 +1,9 @@
+./objects/TComBitStream.r.o: \
+  /home/balli/Coding/Java/project-stuff/trial1/SHM-12.4/build/linux/lib/TLibCommon/../../../../source/Lib/TLibCommon/TComBitStream.cpp \
+  ../../../../source/Lib/TLibCommon/TComBitStream.h \
+  ../../../../source/Lib/TLibCommon/CommonDef.h \
+  ../../../../source/Lib/TLibCommon/TypeDef.h
+  /home/balli/Coding/Java/project-stuff/trial1/SHM-12.4/build/linux/lib/TLibCommon/../../../../source/Lib/TLibCommon/TComBitStream.cpp :
+  ../../../../source/Lib/TLibCommon/TComBitStream.h :
+  ../../../../source/Lib/TLibCommon/CommonDef.h :
+  ../../../../source/Lib/TLibCommon/TypeDef.h :
