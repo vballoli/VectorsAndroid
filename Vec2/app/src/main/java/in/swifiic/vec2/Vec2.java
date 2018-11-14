@@ -2,6 +2,8 @@ package in.swifiic.vec2;
 
 import android.app.Application;
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -23,18 +25,26 @@ public class Vec2 extends Application {
 
     private Toast toast;
 
+    private final String FIRST_TIME = "firstTime";
+
+    private SharedPreferences preferences;
+
     @Override
     public void onCreate() {
         super.onCreate();
         Log.e(TAG, "onCreate: Application class executed"  );
-        transferExecutableFiles();
-        buildFFmpeg();
+        preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        if (preferences.getBoolean(FIRST_TIME, false)) {
+            Log.e(TAG, "onCreate: Build and copying only the first time" );
+            transferFiles();
+            buildFFMpeg();
+        }
     }
 
     /**
      * Build FFMpeg for the device.
      */
-    private void buildFFmpeg() {
+    private void buildFFMpeg() {
         FFmpeg fFmpeg  = FFmpeg.getInstance(this);
 
         try {
@@ -54,7 +64,7 @@ public class Vec2 extends Application {
                 }
 
                 @Override
-                public void onFinish() {}
+                public void onFinish() { preferences.edit().putBoolean(FIRST_TIME, false).apply(); }
             });
         } catch (FFmpegNotSupportedException e) {
             UIUtils.makeToast(this, toast, "Build FFMpeg failed", true);
@@ -64,8 +74,8 @@ public class Vec2 extends Application {
     /**
      * Copies required executable files to /data/data/in.swifiic.vec2/files/
      */
-    private void transferExecutableFiles() {
-        Log.e(TAG, "transferExecutableFiles: Transferring " );
+    private void transferFiles() {
+        Log.e(TAG, "transferFiles: Transferring " );
         copyExecutableToAppDirectory(Constants.DOWN_CONVERT_STATIC_D.replace(Constants.filesBase, ""));
         copyExecutableToAppDirectory(Constants.EXTRACT_ADD_LS.replace(Constants.filesBase, ""));
         copyExecutableToAppDirectory(Constants.T_APP_ENCODER_STATIC_D.replace(Constants.filesBase, ""));
@@ -89,7 +99,7 @@ public class Vec2 extends Application {
             fos.close();
 
             File file = getFileStreamPath (filename);
-            file.setExecutable(true);
+            file.setExecutable(true); // Sets executable permission to the transferred file
             Log.e(TAG, "copyExecutableToAppDirectory: Transfer Success " + filename );
         } catch (FileNotFoundException e) {
             e.printStackTrace();

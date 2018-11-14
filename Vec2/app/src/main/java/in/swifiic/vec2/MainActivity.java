@@ -51,6 +51,8 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
+import in.swifiic.vec2.services.EncoderService;
+
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";

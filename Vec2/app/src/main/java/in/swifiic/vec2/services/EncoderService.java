@@ -1,4 +1,4 @@
-package in.swifiic.vec2;
+package in.swifiic.vec2.services;
 
 import android.app.IntentService;
 import android.content.Intent;
@@ -10,6 +10,8 @@ import com.github.hiteshsondhi88.libffmpeg.exceptions.FFmpegCommandAlreadyRunnin
 import com.jaredrummler.android.shell.CommandResult;
 import com.jaredrummler.android.shell.Shell;
 
+import in.swifiic.vec2.Constants;
+import in.swifiic.vec2.MainActivity;
 import in.swifiic.vec2.helper.FfmpegHelper;
 
 public class EncoderService extends IntentService {
