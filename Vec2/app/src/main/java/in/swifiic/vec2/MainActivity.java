@@ -36,7 +36,9 @@ import android.view.Surface;
 import android.view.TextureView;
 import android.view.View;
 import android.widget.Chronometer;
+import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import java.io.File;
@@ -51,6 +53,7 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
+import in.swifiic.vec2.helper.SharedPrefsUtils;
 import in.swifiic.vec2.services.EncoderService;
 
 public class MainActivity extends AppCompatActivity {
@@ -61,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
     private static final int REQUEST_WRITE_EXTERNAL_STORAGE_PERMISSION_RESULT = 1;
     private static final int STATE_PREVIEW = 0;
     private static final int STATE_WAIT_LOCK = 1;
+    private static final String COUNTER = "COUNTER";
     private int mCaptureState = STATE_PREVIEW;
     private TextureView mTextureView;
     private TextureView.SurfaceTextureListener mSurfaceTextureListener = new TextureView.SurfaceTextureListener() {
@@ -184,6 +188,10 @@ public class MainActivity extends AppCompatActivity {
     }
     private MediaRecorder mMediaRecorder;
     private Chronometer mChronometer;
+    private EditText framerateInput;
+    private EditText videoTimeInput;
+    private Switch resolutionSwitch;
+
     private int mTotalRotation;
     private CameraCaptureSession mPreviewCaptureSession;
     private CameraCaptureSession.CaptureCallback mPreviewCaptureCallback = new
@@ -278,8 +286,22 @@ public class MainActivity extends AppCompatActivity {
         createVideoFolder();
         createImageFolder();
 
-        mChronometer = (Chronometer) findViewById(R.id.chronometer);
-        mTextureView = (TextureView) findViewById(R.id.textureView);
+        mChronometer = findViewById(R.id.chronometer);
+        mTextureView = findViewById(R.id.textureView);
+        framerateInput = findViewById(R.id.framerate_input);
+        videoTimeInput = findViewById(R.id.videotime_input);
+        resolutionSwitch = findViewById(R.id.resolution_switch);
+
+        framerateInput.setText("1");
+        videoTimeInput.setText("10");
+
+        if (SharedPrefsUtils.getBooleanPreference(this, Constants.RESOLUTION_QUALITY, false))
+            resolutionSwitch.setChecked(false);
+        else
+            resolutionSwitch.setChecked(true);
+
+        Log.e(TAG, "onCreate: " + videoTimeInput.getText().toString());
+
 
         mRecordImageButton = (ImageButton) findViewById(R.id.videoOnlineImageButton);
         mRecordImageButton.setOnClickListener(new View.OnClickListener() {
@@ -303,12 +325,21 @@ public class MainActivity extends AppCompatActivity {
                     processIntent.putExtra(Constants.VIDEO_TAG, mVideoFileName);
                     startService(processIntent);
 
+                    SharedPrefsUtils.setIntegerPreference(MainActivity.this, COUNTER,
+                            SharedPrefsUtils.
+                                    getIntegerPreference(MainActivity.this,
+                                            COUNTER, 1) + 1);
+
+                    Log.e(TAG, "onClick: " +  SharedPrefsUtils.
+                            getIntegerPreference(MainActivity.this,
+                                    COUNTER, 1));
+
                     new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {
                             mRecordImageButton.performClick();
                         }
-                    }, 20000);
+                    }, 0);
 
                     Intent mediaStoreUpdateIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
                     mediaStoreUpdateIntent.setData(Uri.fromFile(new File(mVideoFileName)));
@@ -324,7 +355,7 @@ public class MainActivity extends AppCompatActivity {
                         public void run() {
                             mRecordImageButton.performClick();
                         }
-                    }, 20000);
+                    }, Integer.valueOf(videoTimeInput.getText().toString()) * 1000);
                 }
             }
         });
@@ -621,8 +652,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private File createVideoFileName() throws IOException {
-        String timestamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        String prepend = "VIDEO_" + timestamp + "_";
+        String prepend = "op_" + String.valueOf(
+                SharedPrefsUtils.getIntegerPreference(this, COUNTER, 1));
+        Log.e(TAG, "createVideoFileName: " + prepend );
         File videoFile = File.createTempFile(prepend, ".mp4", mVideoFolder);
         mVideoFileName = videoFile.getAbsolutePath();
         return videoFile;
@@ -637,8 +669,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private File createImageFileName() throws IOException {
-        String timestamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        String prepend = "IMAGE_" + timestamp + "_";
+        String prepend = "op_" + String.valueOf(
+                SharedPrefsUtils.getIntegerPreference(this, COUNTER, 1));
+        Log.e(TAG, "createVideoFileName: " + prepend );
         File imageFile = File.createTempFile(prepend, ".jpg", mImageFolder);
         mImageFileName = imageFile.getAbsolutePath();
         return imageFile;
@@ -688,8 +721,11 @@ public class MainActivity extends AppCompatActivity {
         mMediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
         mMediaRecorder.setOutputFile(mVideoFileName);
         mMediaRecorder.setVideoEncodingBitRate(1000000);
-        mMediaRecorder.setVideoFrameRate(30);
-        mMediaRecorder.setVideoSize(mVideoSize.getWidth(), mVideoSize.getHeight());
+        mMediaRecorder.setVideoFrameRate(Integer.valueOf(framerateInput.getText().toString()));
+        if (SharedPrefsUtils.getBooleanPreference(this, Constants.RESOLUTION_QUALITY, false))
+            mMediaRecorder.setVideoSize(320, 240);
+        else
+            mMediaRecorder.setVideoSize(640, 480);
         mMediaRecorder.setVideoEncoder(MediaRecorder.VideoEncoder.H264);
         mMediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AAC);
         mMediaRecorder.setOrientationHint(mTotalRotation);

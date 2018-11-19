@@ -17,6 +17,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
+import in.swifiic.vec2.helper.SharedPrefsUtils;
 import in.swifiic.vec2.helper.UIUtils;
 
 import static android.content.ContentValues.TAG;
@@ -38,6 +39,7 @@ public class Vec2 extends Application {
             Log.e(TAG, "onCreate: Build and copying only the first time" );
             transferFiles();
             buildFFMpeg();
+            SharedPrefsUtils.setBooleanPreference(this, Constants.RESOLUTION_QUALITY, false);
         }
     }
 

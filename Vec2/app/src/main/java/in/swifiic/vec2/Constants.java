@@ -28,6 +28,7 @@ public class Constants {
     public static final String RASCALE = filesBase +  "raScale.cfg";
     public static final String _2L2X = filesBase + "2L-2X_vectors.cfg";
     public static final String  LAYERS2 = filesBase + "layers2.cfg";
+    public static final String RESOLUTION_QUALITY = "ResolutionQuality";
 
     /**
      * Video extras TAGs
@@ -39,4 +40,5 @@ public class Constants {
      * Resolution @link EncoderService
      */
     public static String VID_RESOLUTION = "L";
+
 }

@@ -5,11 +5,58 @@
     android:layout_height="match_parent">
 
     <TextureView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
         android:id="@+id/textureView"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textureView"
+        android:id="@+id/framerate_text"
+        android:text="Video framerate(fps)"
+        android:layout_marginTop="52dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/framerate_input"
+        android:layout_below="@id/textureView"
+        android:layout_marginTop="40dp"
+        android:hint="1"
+        android:layout_toRightOf="@id/framerate_text"
+        android:layout_marginStart="20dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/video_time_text"
+        android:layout_below="@id/textureView"
+        android:text="Video time"
+        android:layout_marginTop="100dp" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/videotime_input"
+        android:layout_below="@id/textureView"
+        android:layout_marginTop="80dp"
+        android:hint="10"
+        android:inputType="number"
+        android:layout_toRightOf="@id/video_time_text"
+        android:layout_marginStart="20dp"/>
+
+    <Switch
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/resolution_switch"
+        android:layout_below="@id/videotime_input"
+        android:text="Low/Medium Resolution"
+        android:textAlignment="textEnd"
+        android:layout_marginTop="40dp"
+        android:layout_marginStart="20dp"/>
 
     <ImageButton
         android:layout_width="wrap_content"
