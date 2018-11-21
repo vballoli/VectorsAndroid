@@ -34,7 +34,6 @@ public class FfmpegHelper {
                 public void onSuccess(String message) {
                     super.onSuccess(message);
                     Log.e(TAG, "onSuccess: " + logMessage + " " + message );
-
                 }
 
                 @Override
@@ -49,10 +48,10 @@ public class FfmpegHelper {
                 }
 
             });
-            return true;
         } catch (FFmpegCommandAlreadyRunningException e) {
             e.printStackTrace();
             return false;
         }
+        return true;
     }
 }

@@ -35,12 +35,12 @@ public class Vec2 extends Application {
         super.onCreate();
         Log.e(TAG, "onCreate: Application class executed"  );
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        if (preferences.getBoolean(FIRST_TIME, false)) {
+        if (preferences.getBoolean(FIRST_TIME, true)) {
             Log.e(TAG, "onCreate: Build and copying only the first time" );
             transferFiles();
-            buildFFMpeg();
             SharedPrefsUtils.setBooleanPreference(this, Constants.RESOLUTION_QUALITY, false);
         }
+        buildFFMpeg();
     }
 
     /**

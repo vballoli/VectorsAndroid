@@ -314,8 +314,6 @@ public class MainActivity extends AppCompatActivity {
                     mIsTimelapse = false;
                     mRecordImageButton.setImageResource(R.drawable.video);
 
-                    // Starting the preview prior to stopping recording which should hopefully
-                    // resolve issues being seen in Samsung devices.
                     startPreview();
                     mMediaRecorder.stop();
                     mMediaRecorder.reset();
@@ -334,12 +332,15 @@ public class MainActivity extends AppCompatActivity {
                             getIntegerPreference(MainActivity.this,
                                     COUNTER, 1));
 
-                    new Handler().postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            mRecordImageButton.performClick();
-                        }
-                    }, 0);
+
+                    //Immediately starts recording after the previous session.
+                    //TODO Uncomment this to start the continuous loop forever
+//                    new Handler().postDelayed(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            mRecordImageButton.performClick();
+//                        }
+//                    }, 0);
 
                     Intent mediaStoreUpdateIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
                     mediaStoreUpdateIntent.setData(Uri.fromFile(new File(mVideoFileName)));
@@ -350,6 +351,7 @@ public class MainActivity extends AppCompatActivity {
                     mRecordImageButton.setImageResource(R.drawable.video_off);
                     checkWriteStoragePermission();
 
+                    //Stops recording after certain time
                     new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {
@@ -657,6 +659,7 @@ public class MainActivity extends AppCompatActivity {
         Log.e(TAG, "createVideoFileName: " + prepend );
         File videoFile = File.createTempFile(prepend, ".mp4", mVideoFolder);
         mVideoFileName = videoFile.getAbsolutePath();
+        Log.e("Video File name", "createVideoFileName: " + mVideoFileName);
         return videoFile;
     }
 
