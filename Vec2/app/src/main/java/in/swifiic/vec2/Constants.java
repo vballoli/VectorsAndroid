@@ -6,6 +6,14 @@ import android.os.Environment;
 public class Constants {
 
     /**
+     * App Constants
+     */
+    public static final String APP_TYPE = "TYPE";
+    public static final String SENDER_TYPE = "SENDER";
+    public static final String RECEIVER_TYPE = "RECEIVER";
+    public static final String CHOOSE_TYPE = "CHOOSE_TYPE";
+
+    /**
      * PATH to the directory containing project files.
      */
     public static final String filesBase = "/data/data/in.swifiic.vec2/files/";

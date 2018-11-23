@@ -2,51 +2,81 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
 
     <TextureView
         android:layout_width="200dp"
         android:layout_height="200dp"
         android:id="@+id/textureView"
         android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="20dp"/>
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/videoOnlineImageButton"
+        android:contentDescription="Video button"
+        android:src="@drawable/video"
+        android:layout_marginTop="105dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="49dp" />
+
+    <Chronometer
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/chronometer"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="80dp"
+        android:layout_marginEnd="50dp"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/textureView"
         android:id="@+id/framerate_text"
-        android:text="Video framerate(fps)"
-        android:layout_marginTop="52dp" />
+        android:text="@string/video_framerate"
+        android:layout_marginTop="52dp"
+        android:layout_marginStart="8dp"
+        android:textColor="@android:color/white"/>
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/framerate_input"
         android:layout_below="@id/textureView"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="36dp"
         android:hint="1"
         android:layout_toRightOf="@id/framerate_text"
-        android:layout_marginStart="20dp"/>
+        android:layout_marginStart="20dp"
+        android:textColor="@android:color/white"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/video_time_text"
         android:layout_below="@id/textureView"
-        android:text="Video time"
-        android:layout_marginTop="100dp" />
+        android:text="@string/video_time"
+        android:layout_marginTop="100dp"
+        android:layout_marginStart="8dp"
+        android:textColor="@android:color/white"/>
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/videotime_input"
         android:layout_below="@id/textureView"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="84dp"
         android:hint="10"
         android:inputType="number"
         android:layout_toRightOf="@id/video_time_text"
-        android:layout_marginStart="20dp"/>
+        android:layout_marginStart="20dp"
+        android:textColor="@android:color/white"/>
 
     <Switch
         android:layout_width="wrap_content"
@@ -56,27 +86,6 @@
         android:text="Low/Medium Resolution"
         android:textAlignment="textEnd"
         android:layout_marginTop="40dp"
-        android:layout_marginStart="20dp"/>
-
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/videoOnlineImageButton"
-        android:contentDescription="Video button"
-        android:src="@drawable/video"
-        android:layout_marginBottom="36dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="49dp" />
-
-    <Chronometer
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/chronometer"
-        android:visibility="invisible"
-        android:textColor="#ff0000"
-        android:textSize="25dp"
-        android:layout_above="@+id/videoOnlineImageButton"
-        android:layout_alignStart="@+id/videoOnlineImageButton" />
+        android:layout_marginStart="8dp"/>
 
 </RelativeLayout>

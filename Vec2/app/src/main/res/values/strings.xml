@@ -5,4 +5,10 @@
     <string name="stop">stop</string>
     <string name="record">record</string>
     <string name="description_info">Description</string>
+    <string name="paper_name">Oppurtunistic Video Streaming \n using \n Scalable Video Coding</string>
+    <string name="sender">Sender</string>
+    <string name="receiver">Receiver</string>
+    <string name="logout">Logout</string>
+    <string name="video_time">Video time(seconds)</string>
+    <string name="video_framerate">Video framerate(fps)</string>
 </resources>

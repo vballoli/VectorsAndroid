@@ -2,16 +2,15 @@ package in.swifiic.vec2.services;
 
 import android.app.IntentService;
 import android.content.Intent;
-import android.os.Environment;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
-import com.github.hiteshsondhi88.libffmpeg.exceptions.FFmpegCommandAlreadyRunningException;
+import com.github.hiteshsondhi88.libffmpeg.FFmpeg;
 import com.jaredrummler.android.shell.CommandResult;
 import com.jaredrummler.android.shell.Shell;
 
 import in.swifiic.vec2.Constants;
-import in.swifiic.vec2.MainActivity;
+import in.swifiic.vec2.SenderActivity;
 import in.swifiic.vec2.helper.FfmpegHelper;
 
 public class EncoderService extends IntentService {
@@ -76,10 +75,12 @@ public class EncoderService extends IntentService {
     private boolean getRawFrames(String filename) {
         Log.e(TAG, "getRawFrames: Starting frames" );
         String inputFileName = filename + ".mp4";
+        String command_reduce_fps = "-y -i " + inputFileName + " -r 4 " + inputFileName.replace(".mp4", "_4.mp4");
+        while(!FfmpegHelper.run(this, command_reduce_fps, "4fps"));
+        inputFileName = inputFileName.replace(".mp4", "_4.mp4");
         String intermediateFileName = inputFileName.replace(".mp4", ".yuv");
         String command_yuv =  "-i " + inputFileName
                 + " -s " + resolution + " -r " + framerate + " " + intermediateFileName;
-
         while(!FfmpegHelper.run(this, command_yuv, "YUV command 1"));
         String outputFileName = intermediateFileName.replace(".yuv", "_yuv420p.yuv");
         String command_yuv_q = "-y -r " + framerate + " -s " + resolution + " -pix_fmt yuyv422 -i " + intermediateFileName
@@ -156,7 +157,7 @@ public class EncoderService extends IntentService {
         if (extractResult.isSuccessful()) {
             Log.e(TAG, "extractFile: " + filename + " Successful" );
             Intent broadcastIntent = new Intent();
-            broadcastIntent.setAction(MainActivity.EncoderServiceReceiver.EncoderServiceReceiverTAG);
+            broadcastIntent.setAction(SenderActivity.EncoderServiceReceiver.EncoderServiceReceiverTAG);
             broadcastIntent.addCategory(Intent.CATEGORY_DEFAULT);
             broadcastIntent.putExtra(Constants.VIDEO_RESULT, filename);
             sendBroadcast(broadcastIntent);

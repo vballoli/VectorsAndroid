@@ -23,7 +23,6 @@ import android.media.MediaRecorder;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
-import android.os.FileObserver;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.SystemClock;
@@ -33,6 +32,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.util.Size;
 import android.util.SparseIntArray;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.Surface;
 import android.view.TextureView;
 import android.view.View;
@@ -46,21 +48,18 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.ByteBuffer;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Date;
 import java.util.List;
 
 import in.swifiic.vec2.helper.SharedPrefsUtils;
 import in.swifiic.vec2.services.EncoderService;
-import in.swifiic.vec2.services.FileObserverService;
 
-public class MainActivity extends AppCompatActivity {
+public class SenderActivity extends AppCompatActivity {
 
-    private static final String TAG = "MainActivity";
+    private static final String TAG = "SenderActivity";
 
     private static final int REQUEST_CAMERA_PERMISSION_RESULT = 0;
     private static final int REQUEST_WRITE_EXTERNAL_STORAGE_PERMISSION_RESULT = 1;
@@ -292,11 +291,6 @@ public class MainActivity extends AppCompatActivity {
                 Constants.SRC_TAG, "");
 
 
-        Intent intent = new Intent(this, FileObserverService.class);
-        intent.putExtra(Constants.SRC_TAG, "/storage/emulated/0/Movies/Vec2/src/");
-        this.startService(intent);
-
-
         mChronometer = findViewById(R.id.chronometer);
         mTextureView = findViewById(R.id.textureView);
         framerateInput = findViewById(R.id.framerate_input);
@@ -329,18 +323,18 @@ public class MainActivity extends AppCompatActivity {
                     mMediaRecorder.stop();
                     mMediaRecorder.reset();
 
-                    Intent processIntent = new Intent(MainActivity.this,
+                    Intent processIntent = new Intent(SenderActivity.this,
                             EncoderService.class);
                     processIntent.putExtra(Constants.VIDEO_TAG, mVideoFileName);
                     startService(processIntent);
 
-                    SharedPrefsUtils.setIntegerPreference(MainActivity.this, COUNTER,
+                    SharedPrefsUtils.setIntegerPreference(SenderActivity.this, COUNTER,
                             SharedPrefsUtils.
-                                    getIntegerPreference(MainActivity.this,
+                                    getIntegerPreference(SenderActivity.this,
                                             COUNTER, 1) + 1);
 
                     Log.e(TAG, "onClick: " +  SharedPrefsUtils.
-                            getIntegerPreference(MainActivity.this,
+                            getIntegerPreference(SenderActivity.this,
                                     COUNTER, 1));
 
 
@@ -432,9 +426,7 @@ public class MainActivity extends AppCompatActivity {
         if(hasFocas) {
             decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                     | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
-                    | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
                     | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                    | View.SYSTEM_UI_FLAG_FULLSCREEN
                     | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
         }
     }
@@ -760,6 +752,27 @@ public class MainActivity extends AppCompatActivity {
         mMediaRecorder.setCaptureRate(Integer.valueOf(framerateInput.getText().toString()));
         mMediaRecorder.setOrientationHint(mTotalRotation);
         mMediaRecorder.prepare();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = new MenuInflater(this);
+        menuInflater.inflate(R.menu.sender_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.sender_logout:
+                SharedPrefsUtils.setStringPreference(this, Constants.APP_TYPE, Constants.CHOOSE_TYPE);
+                startActivity(new Intent(this, SplashActivity.class));
+                finish();
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     public class EncoderServiceReceiver extends BroadcastReceiver {
