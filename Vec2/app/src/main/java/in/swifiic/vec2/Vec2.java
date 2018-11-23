@@ -3,6 +3,7 @@ package in.swifiic.vec2;
 import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.Toast;
@@ -38,6 +39,7 @@ public class Vec2 extends Application {
         if (preferences.getBoolean(FIRST_TIME, true)) {
             Log.e(TAG, "onCreate: Build and copying only the first time" );
             transferFiles();
+            createDirectories();
             SharedPrefsUtils.setBooleanPreference(this, Constants.RESOLUTION_QUALITY, false);
         }
         buildFFMpeg();
@@ -112,6 +114,27 @@ public class Vec2 extends Application {
             Log.e(TAG, "importExecutables: IO exception for file: " + filename );
             Log.e(TAG, "copyExecutableToAppDirectory: Transfer Failed: " + filename );
         }
+    }
+
+    /**
+     * Creates required folders for the app
+     */
+    private void createDirectories () {
+        File movieFile = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MOVIES);
+        File mVideoFolder = new File(movieFile, "Vec2");
+        if(!mVideoFolder.exists()) {
+            mVideoFolder.mkdirs();
+        }
+        mVideoFolder = new File(movieFile.getAbsolutePath()+"/Vec2", "src");
+        if(!mVideoFolder.exists()) {
+            mVideoFolder.mkdirs();
+        }
+        mVideoFolder = new File(movieFile.getAbsolutePath()+"/Vec2", "rec");
+        if(!mVideoFolder.exists()) {
+            mVideoFolder.mkdirs();
+        }
+        SharedPrefsUtils.setStringPreference(this, Constants.SRC_TAG, movieFile.getAbsolutePath()+"/Vec2/src/");
+        SharedPrefsUtils.setStringPreference(this, Constants.RCV_TAG, movieFile.getAbsolutePath()+"/Vec2/rcv/");
     }
 
 }

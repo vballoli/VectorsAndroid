@@ -1,6 +1,7 @@
 package in.swifiic.vec2;
 
 import android.annotation.SuppressLint;
+import android.os.Environment;
 
 public class Constants {
 
@@ -29,6 +30,7 @@ public class Constants {
     public static final String _2L2X = filesBase + "2L-2X_vectors.cfg";
     public static final String  LAYERS2 = filesBase + "layers2.cfg";
     public static final String RESOLUTION_QUALITY = "ResolutionQuality";
+    public static final String SRC_TAG = "SRC_FOLDER";
 
     /**
      * Video extras TAGs
@@ -40,5 +42,10 @@ public class Constants {
      * Resolution @link EncoderService
      */
     public static String VID_RESOLUTION = "L";
+
+    /**
+     * Receiver folder constants
+     */
+    public static final String RCV_TAG = "RECEIVER_FOLDER";
 
 }

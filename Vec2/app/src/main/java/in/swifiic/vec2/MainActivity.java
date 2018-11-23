@@ -23,6 +23,7 @@ import android.media.MediaRecorder;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
+import android.os.FileObserver;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.SystemClock;
@@ -55,6 +56,7 @@ import java.util.List;
 
 import in.swifiic.vec2.helper.SharedPrefsUtils;
 import in.swifiic.vec2.services.EncoderService;
+import in.swifiic.vec2.services.FileObserverService;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -286,13 +288,22 @@ public class MainActivity extends AppCompatActivity {
         createVideoFolder();
         createImageFolder();
 
+        String receiverFolderPath = SharedPrefsUtils.getStringPreference(this,
+                Constants.SRC_TAG, "");
+
+
+        Intent intent = new Intent(this, FileObserverService.class);
+        intent.putExtra(Constants.SRC_TAG, "/storage/emulated/0/Movies/Vec2/src/");
+        this.startService(intent);
+
+
         mChronometer = findViewById(R.id.chronometer);
         mTextureView = findViewById(R.id.textureView);
         framerateInput = findViewById(R.id.framerate_input);
         videoTimeInput = findViewById(R.id.videotime_input);
         resolutionSwitch = findViewById(R.id.resolution_switch);
 
-        framerateInput.setText("1");
+        framerateInput.setText("30");
         videoTimeInput.setText("10");
 
         if (SharedPrefsUtils.getBooleanPreference(this, Constants.RESOLUTION_QUALITY, false))
@@ -647,7 +658,13 @@ public class MainActivity extends AppCompatActivity {
         if(!mVideoFolder.exists()) {
             mVideoFolder.mkdirs();
         }
-        mVideoFolder = new File(movieFile.getAbsolutePath()+"/Vec2", "rec");
+
+        mVideoFolder = new File(movieFile.getAbsolutePath()+"/Vec2", "rcv");
+        if(!mVideoFolder.exists()) {
+            mVideoFolder.mkdirs();
+        }
+
+        mVideoFolder = new File(movieFile.getAbsolutePath()+"/Vec2", "src");
         if(!mVideoFolder.exists()) {
             mVideoFolder.mkdirs();
         }
@@ -657,7 +674,8 @@ public class MainActivity extends AppCompatActivity {
         String prepend = "op_" + String.valueOf(
                 SharedPrefsUtils.getIntegerPreference(this, COUNTER, 1));
         Log.e(TAG, "createVideoFileName: " + prepend );
-        File videoFile = File.createTempFile(prepend, ".mp4", mVideoFolder);
+        File videoFile = new File(mVideoFolder + "/" + prepend+".mp4");
+        videoFile.createNewFile();
         mVideoFileName = videoFile.getAbsolutePath();
         Log.e("Video File name", "createVideoFileName: " + mVideoFileName);
         return videoFile;
@@ -739,7 +757,7 @@ public class MainActivity extends AppCompatActivity {
         mMediaRecorder.setVideoSource(MediaRecorder.VideoSource.SURFACE);
         mMediaRecorder.setProfile(CamcorderProfile.get(CamcorderProfile.QUALITY_TIME_LAPSE_HIGH));
         mMediaRecorder.setOutputFile(mVideoFileName);
-        mMediaRecorder.setCaptureRate(2);
+        mMediaRecorder.setCaptureRate(Integer.valueOf(framerateInput.getText().toString()));
         mMediaRecorder.setOrientationHint(mTotalRotation);
         mMediaRecorder.prepare();
     }
