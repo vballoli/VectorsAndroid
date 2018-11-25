@@ -11,4 +11,11 @@
     <string name="logout">Logout</string>
     <string name="video_time">Video time(seconds)</string>
     <string name="video_framerate">Video framerate(fps)</string>
+    <string name="video_button">Video button</string>
+    <string name="resolution_display">Low/Medium Resolution</string>
+    <string name="video_time_hint">10</string>
+    <string name="video_fps_hint">30</string>
+    <string name="number_of_files">Number of Files</string>
+    <string name="number_of_md">Number of .md</string>
+    <string name="number_of_l0t1">Number of L0T1</string>
 </resources>

@@ -9,4 +9,67 @@
         android:layout_centerHorizontal="true"
         android:id="@+id/receiver_logs_text"/>
 
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:stretchColumns="0,1,2,3"
+        android:layout_marginTop="8dp" >
+
+        <TableRow
+            android:layout_margin="4dp"
+            android:padding="4dp"
+            android:layout_marginTop="4dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Total"
+                android:layout_column="0"
+                android:gravity="center"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="N"
+                android:layout_column="1"
+                android:gravity="center"/>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_marginEnd="4dp"
+            android:layout_marginTop="8dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="N-N()"
+                android:layout_column="0"
+                android:gravity="center"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/number_of_files"
+                android:layout_column="1"
+                android:gravity="center"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/number_of_md"
+                android:layout_column="2"
+                android:gravity="center"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/number_of_l0t1"
+                android:layout_column="3"
+                android:gravity="center"/>
+
+        </TableRow>
+
+    </TableLayout>
+
 </RelativeLayout>
