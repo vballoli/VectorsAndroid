@@ -125,14 +125,22 @@ public class Vec2 extends Application {
         if(!mVideoFolder.exists()) {
             mVideoFolder.mkdirs();
         }
+
         mVideoFolder = new File(movieFile.getAbsolutePath()+"/Vec2", "src");
         if(!mVideoFolder.exists()) {
             mVideoFolder.mkdirs();
         }
-        mVideoFolder = new File(movieFile.getAbsolutePath()+"/Vec2", "rec");
+
+        mVideoFolder = new File(movieFile.getAbsolutePath()+"/Vec2", "rcv_json");
         if(!mVideoFolder.exists()) {
             mVideoFolder.mkdirs();
         }
+
+        mVideoFolder = new File(movieFile.getAbsolutePath()+"/Vec2", "rcv");
+        if(!mVideoFolder.exists()) {
+            mVideoFolder.mkdirs();
+        }
+
         SharedPrefsUtils.setStringPreference(this, Constants.SRC_TAG, movieFile.getAbsolutePath()+"/Vec2/src/");
         SharedPrefsUtils.setStringPreference(this, Constants.RCV_TAG, movieFile.getAbsolutePath()+"/Vec2/rcv/");
     }

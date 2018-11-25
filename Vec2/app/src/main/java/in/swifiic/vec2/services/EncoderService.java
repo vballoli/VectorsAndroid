@@ -98,7 +98,7 @@ public class EncoderService extends IntentService {
      */
     private boolean downConvertFile(String filename) {
         Log.e(TAG, "downConvertFile: Down converting " );
-        String inputFileName = filename + "_yuv420p.yuv";
+        String inputFileName = filename + "_4_yuv420p.yuv";
         String outputFileName = inputFileName.replace("_yuv420p.yuv", "_Q.yuv");
         String downConvertArguments = dc_res_1 + " " + inputFileName + " " + dc_res_2 + " " +
                 outputFileName;
@@ -123,6 +123,7 @@ public class EncoderService extends IntentService {
      */
     private boolean encodeFile(String filename) {
         Log.e(TAG, "encodeFile: Encoding ");
+        filename += "_4";
         String input_0 = filename + "_Q.yuv";
         String input_1 = filename + ".yuv";
         String output_bin = filename + ".bin";

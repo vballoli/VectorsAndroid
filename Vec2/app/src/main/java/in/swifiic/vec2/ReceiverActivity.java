@@ -24,7 +24,7 @@ public class ReceiverActivity extends AppCompatActivity {
         receiverLogs = findViewById(R.id.receiver_logs_text);
 
         Intent intent = new Intent(this, FileObserverService.class);
-        intent.putExtra(Constants.SRC_TAG, "/storage/emulated/0/Movies/Vec2/rec/");
+        intent.putExtra(Constants.SRC_TAG, "/storage/emulated/0/Movies/Vec2/rcv/");
         this.startService(intent);
 
     }

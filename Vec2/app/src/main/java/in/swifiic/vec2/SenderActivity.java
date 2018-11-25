@@ -328,11 +328,6 @@ public class SenderActivity extends AppCompatActivity {
                     processIntent.putExtra(Constants.VIDEO_TAG, mVideoFileName);
                     startService(processIntent);
 
-                    SharedPrefsUtils.setIntegerPreference(SenderActivity.this, COUNTER,
-                            SharedPrefsUtils.
-                                    getIntegerPreference(SenderActivity.this,
-                                            COUNTER, 1) + 1);
-
                     Log.e(TAG, "onClick: " +  SharedPrefsUtils.
                             getIntegerPreference(SenderActivity.this,
                                     COUNTER, 1));
@@ -663,8 +658,9 @@ public class SenderActivity extends AppCompatActivity {
     }
 
     private File createVideoFileName() throws IOException {
-        String prepend = "op_" + String.valueOf(
-                SharedPrefsUtils.getIntegerPreference(this, COUNTER, 1));
+        String prepend = "op_" + String.format("%06d", SharedPrefsUtils.getIntegerPreference(
+                this, COUNTER, 1
+        ));
         Log.e(TAG, "createVideoFileName: " + prepend );
         File videoFile = new File(mVideoFolder + "/" + prepend+".mp4");
         videoFile.createNewFile();
@@ -782,6 +778,10 @@ public class SenderActivity extends AppCompatActivity {
         @Override
         public void onReceive(Context context, Intent intent) {
             String filename = intent.getStringExtra(Constants.VIDEO_RESULT);
+            SharedPrefsUtils.setIntegerPreference(SenderActivity.this, COUNTER,
+                    SharedPrefsUtils.
+                            getIntegerPreference(SenderActivity.this,
+                                    COUNTER, 1) + 1);
             Log.e(TAG, "onReceive: " + filename);
         }
     }
