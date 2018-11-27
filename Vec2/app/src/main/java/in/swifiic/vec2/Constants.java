@@ -39,6 +39,10 @@ public class Constants {
     public static final String  LAYERS2 = filesBase + "layers2.cfg";
     public static final String RESOLUTION_QUALITY = "ResolutionQuality";
     public static final String SRC_TAG = "SRC_FOLDER";
+    public static final String SOURCE_ADDRESS = "d2f3a6";
+    public static final String DESTINATION_ADDRESS = "c642bf";
+    public static final int DELAY_TIME = 30;
+    public static final String FILE_CHANGE = "FILE_CHANGE";
 
     /**
      * Video extras TAGs
@@ -89,5 +93,5 @@ public class Constants {
     public static final int RESTART_NEARBY_SECS = 300;
     public static final int FILE_BUFFER_SIZE = 1024*16;
     public static final int ACK_BUFFER_SIZE = 1024*128;
-
+    public static String BASE_TAG = "VECTORS_DATA";
 }

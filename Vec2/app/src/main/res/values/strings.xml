@@ -18,4 +18,7 @@
     <string name="number_of_files">Number of Files</string>
     <string name="number_of_md">Number of .md</string>
     <string name="number_of_l0t1">Number of L0T1</string>
+    <string name="destination_address">Dest. Addr</string>
+    <string name="source_address">Source address:</string>
+    <string name="delay_time_mins">Delay time(mins)</string>
 </resources>

@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.graphics.ImageFormat;
 import android.graphics.SurfaceTexture;
@@ -38,10 +39,12 @@ import android.view.MenuItem;
 import android.view.Surface;
 import android.view.TextureView;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Chronometer;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
@@ -192,6 +195,9 @@ public class SenderActivity extends AppCompatActivity {
     private EditText framerateInput;
     private EditText videoTimeInput;
     private Switch resolutionSwitch;
+    private EditText destinationInput;
+    private TextView sourceAddress;
+    private EditText delayTimeInput;
 
     private int mTotalRotation;
     private CameraCaptureSession mPreviewCaptureSession;
@@ -262,6 +268,8 @@ public class SenderActivity extends AppCompatActivity {
     private File mImageFolder;
     private String mImageFileName;
 
+    private EncoderServiceReceiver receiver;
+
     private static SparseIntArray ORIENTATIONS = new SparseIntArray();
     static {
         ORIENTATIONS.append(Surface.ROTATION_0, 0);
@@ -287,8 +295,12 @@ public class SenderActivity extends AppCompatActivity {
         createVideoFolder();
         createImageFolder();
 
-        String receiverFolderPath = SharedPrefsUtils.getStringPreference(this,
-                Constants.SRC_TAG, "");
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+
+        IntentFilter intentFilter = new IntentFilter(EncoderServiceReceiver.EncoderServiceReceiverTAG);
+        intentFilter.addCategory(Intent.CATEGORY_DEFAULT);
+        receiver = new EncoderServiceReceiver();
+        registerReceiver(receiver, intentFilter);
 
 
         mChronometer = findViewById(R.id.chronometer);
@@ -296,6 +308,13 @@ public class SenderActivity extends AppCompatActivity {
         framerateInput = findViewById(R.id.framerate_input);
         videoTimeInput = findViewById(R.id.videotime_input);
         resolutionSwitch = findViewById(R.id.resolution_switch);
+        sourceAddress = findViewById(R.id.source_address_text);
+        destinationInput = findViewById(R.id.destination_address_input);
+        delayTimeInput = findViewById(R.id.delay_time_input);
+
+        sourceAddress.setText("Source address: " + Constants.SOURCE_ADDRESS);
+        destinationInput.setText(Constants.DESTINATION_ADDRESS);
+        delayTimeInput.setText(String.valueOf(Constants.DELAY_TIME));
 
         framerateInput.setText("30");
         videoTimeInput.setText("10");
@@ -312,7 +331,7 @@ public class SenderActivity extends AppCompatActivity {
         mRecordImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mIsRecording || mIsTimelapse) {
+                if (mIsRecording) {
                     mChronometer.stop();
                     mChronometer.setVisibility(View.INVISIBLE);
                     mIsRecording = false;
@@ -320,8 +339,12 @@ public class SenderActivity extends AppCompatActivity {
                     mRecordImageButton.setImageResource(R.drawable.video);
 
                     startPreview();
-                    mMediaRecorder.stop();
-                    mMediaRecorder.reset();
+                    try {
+                        mMediaRecorder.stop();
+                        mMediaRecorder.reset();
+                    } catch (Exception e) {
+
+                    }
 
                     Intent processIntent = new Intent(SenderActivity.this,
                             EncoderService.class);
@@ -340,11 +363,11 @@ public class SenderActivity extends AppCompatActivity {
 //                        public void run() {
 //                            mRecordImageButton.performClick();
 //                        }
-//                    }, 0);
+//                    }, 1000 * 60 * 8);
 
-                    Intent mediaStoreUpdateIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
-                    mediaStoreUpdateIntent.setData(Uri.fromFile(new File(mVideoFileName)));
-                    sendBroadcast(mediaStoreUpdateIntent);
+//                    Intent mediaStoreUpdateIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+//                    mediaStoreUpdateIntent.setData(Uri.fromFile(new File(mVideoFileName)));
+//                    sendBroadcast(mediaStoreUpdateIntent);
 
                 } else {
                     mIsRecording = true;
@@ -640,7 +663,7 @@ public class SenderActivity extends AppCompatActivity {
     }
 
     private void createVideoFolder() {
-        File movieFile = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MOVIES);
+        File movieFile = Environment.getExternalStorageDirectory();
         mVideoFolder = new File(movieFile, "Vec2");
         if(!mVideoFolder.exists()) {
             mVideoFolder.mkdirs();
@@ -651,10 +674,16 @@ public class SenderActivity extends AppCompatActivity {
             mVideoFolder.mkdirs();
         }
 
+        mVideoFolder = new File(movieFile.getAbsolutePath()+"/Vec2", "rcv_json");
+        if(!mVideoFolder.exists()) {
+            mVideoFolder.mkdirs();
+        }
+
         mVideoFolder = new File(movieFile.getAbsolutePath()+"/Vec2", "src");
         if(!mVideoFolder.exists()) {
             mVideoFolder.mkdirs();
         }
+
     }
 
     private File createVideoFileName() throws IOException {
@@ -670,7 +699,7 @@ public class SenderActivity extends AppCompatActivity {
     }
 
     private void createImageFolder() {
-        File imageFile = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+        File imageFile = Environment.getExternalStorageDirectory();
         mImageFolder = new File(imageFile, "Vec2");
         if(!mImageFolder.exists()) {
             mImageFolder.mkdirs();
@@ -778,10 +807,17 @@ public class SenderActivity extends AppCompatActivity {
         @Override
         public void onReceive(Context context, Intent intent) {
             String filename = intent.getStringExtra(Constants.VIDEO_RESULT);
+            Vec2ExImLogic logic = new Vec2ExImLogic(SenderActivity.this);
+            logic.exportBurst(SharedPrefsUtils.
+                            getIntegerPreference(SenderActivity.this, COUNTER, 0),
+                    Constants.SOURCE_ADDRESS, destinationInput.getText().toString(),
+                    Integer.valueOf(delayTimeInput.getText().toString()) * 60
+                    );
             SharedPrefsUtils.setIntegerPreference(SenderActivity.this, COUNTER,
                     SharedPrefsUtils.
                             getIntegerPreference(SenderActivity.this,
                                     COUNTER, 1) + 1);
+            mRecordImageButton.performClick();
             Log.e(TAG, "onReceive: " + filename);
         }
     }

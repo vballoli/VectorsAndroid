@@ -1,12 +1,14 @@
 package in.swifiic.vec2;
 
 import android.content.Context;
+import android.os.Environment;
 import android.util.Log;
 import android.widget.Toast;
 
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -18,11 +20,13 @@ public class Vec2ExImLogic {
     private static final String TAG = "Vec2ExImLogic";
 
     //public static final String SRC_BASE="/sdcard/Vec2/src";
-    public static final String SRC_BASE="/storage/emulated/0/Movies/Vec2/src";
-    public static final String VECTORS_BASE="/sdcard/VectorsData";
-    public static final String RCV_BASE="/storage/emulated/0/Movies/Vec2/rcv";
-    public static final String RCV_BASE_JSON="/storage/emulated/0/Movies/Vec2/rcv_json";
-    public static final String ACK_FILENAME = "ack_video_00";
+
+    public static final String PROJECT_BASE = Environment.getExternalStorageDirectory().getAbsolutePath();
+    public static final String SRC_BASE= PROJECT_BASE + "/Vec2/src";
+    public static final String VECTORS_BASE= PROJECT_BASE + "/VectorsData";
+    public static final String RCV_BASE= PROJECT_BASE + "/Vec2/rcv";
+    public static final String RCV_BASE_JSON= PROJECT_BASE + "/Vec2/rcv_json";
+    public static final String ACK_FILENAME = "ack_op_00";
 
     public static final double ADD_INCR=0.001;
     public static final double MULT_DECR=0.01;
@@ -40,7 +44,7 @@ public class Vec2ExImLogic {
     }
 
     private String getBaseFileNameForBurst(int burstId) {
-        return String.format("%06d", burstId) + "_video";
+        return "op_" + String.format("%06d", burstId) + "_4";
     }
 
     /**
@@ -55,6 +59,8 @@ public class Vec2ExImLogic {
      */
     private void createJsonAndMoveFiles(String fileName, int copyCount, int seqCount,
                                         String originNode, String destNode, int ttlTime) {
+        Log.e(TAG, "createJsonAndMoveFiles: started " );
+        Log.e(TAG, "createJsonAndMoveFiles: File: " + fileName );
         String jsonFile= fileName + ".json";
         long timeInSec = System.currentTimeMillis() / 1000;
 
@@ -63,7 +69,7 @@ public class Vec2ExImLogic {
                 "\",\"maxSvcLayer\":2,\"maxTemporalLayer\":5,\"sequenceNumber\":" + seqCount +
                 ",\"svcLayer\":0,\"temporalLayer\":0,\"tickets\":" + copyCount+
                 ",\"traversal\":[{\"first\":"+timeInSec +",\"second\":\""+ originNode +
-                "\"}],\"ttl\":" + ttlTime + "\"destinationNode\":\""+destNode +
+                "\"}],\"ttl\":" + ttlTime + ",\"destinationNode\":\""+destNode +
                 "\",\"sourceNode\":\"" + originNode +"\"}";
         File f = new File(VECTORS_BASE +"/" + jsonFile );
         try {
@@ -71,7 +77,7 @@ public class Vec2ExImLogic {
             fw.write(outStr);
             fw.close();
         } catch(Exception ex) {
-            String msg = "Failed while creating JSON for filename " + jsonFile + ex.getMessage();
+            String msg = "Failed while creating JSON for filename " + jsonFile + " " + ex.getMessage();
             Log.e("JSON", msg);
             Toast.makeText(context, msg,  Toast.LENGTH_LONG).show();
         }
@@ -104,6 +110,7 @@ public class Vec2ExImLogic {
      */
     protected void exportBurst(int burstId, String originNode, String destNode, int delayTarget) {
         int filePresentCount =3;
+        Log.e(TAG, "exportBurst: started ");
         // TODO get persistentFactor from sharedPreferences
         // ${indexLast}_L0T1.out|${indexSecondLast}_L0T1.out|${indexThirdLast}_L0T1.out
         String fileName1=VECTORS_BASE + getBaseFileNameForBurst( burstId -burstInDT)+"_L0T1.out";
@@ -118,13 +125,19 @@ public class Vec2ExImLogic {
 
         persistentFactor = persistentFactor * Math.pow(MULT_DECR, 3-filePresentCount) +
                 ADD_INCR *filePresentCount;
-        if(persistentFactor > 1) persistentFactor = 1;
+        if(persistentFactor > 1)
+            persistentFactor = 1;
+        else if (persistentFactor < 1.0 / Maxlayers)
+                persistentFactor = 1.0 / Maxlayers;
+
 
         // TODO store back persistentFactor in shared preference
 
         int numLayers = (int)(Maxlayers * persistentFactor);
         if(numLayers <1) numLayers =1;
         if(numLayers <10 && numLayers > 5) numLayers = 5;
+
+        Log.e(TAG, "exportBurst: " + PROJECT_BASE );
 
         createJsonAndMoveFiles(getBaseFileNameForBurst(burstId) + ".md", CC_LIST[0], burstId, originNode, destNode, delayTarget * 2);
 
@@ -171,7 +184,8 @@ public class Vec2ExImLogic {
 
     }
 
-    protected void importFilename(String filePathName) {
+    public void importFilename(String filePathName) {
+        Log.e(TAG, "importFilename: Started");
         File source = new File(filePathName);
         File sourceJson =  new File(filePathName + ".json");
         String fileName = source.getName();
@@ -179,6 +193,7 @@ public class Vec2ExImLogic {
         File destJson = new File(RCV_BASE_JSON + "/" + fileName + ".json") ;
         try {
             source.renameTo(dest);
+            Log.d(TAG, "importFilename: Success " + dest);
         }catch(Exception exMove) {
             String msg = "Failed while importing Content filelename " + fileName + exMove.getMessage();
 
@@ -187,6 +202,7 @@ public class Vec2ExImLogic {
         }
         try {
             sourceJson.renameTo(destJson);
+            Log.d(TAG, "importFilename: Success JSON " + destJson);
         }catch(Exception exMove) {
             String msg = "Failed while importing Content filelename " + fileName + exMove.getMessage();
 
@@ -199,8 +215,16 @@ public class Vec2ExImLogic {
         aI.setTime(timeInSec);
         aI.setFilename(fileName);
 
-        Acknowledgement ack = getAckFromFile();
-        ack.setAckTime(timeInSec);
+        Acknowledgement ack = null;
+        try {ack = getAckFromFile();} catch(Exception ex) {}
+        if (ack != null) {
+            ack.setAckTime(timeInSec);
+        } else {
+            ack = new Acknowledgement();
+            ArrayList<AckItem> aIList = new ArrayList<>();
+            ack.setItems(aIList);
+            ack.setAckTime(timeInSec);
+        }
 
         List<AckItem> itemList = ack.getItems();
         itemList.add(0,aI);

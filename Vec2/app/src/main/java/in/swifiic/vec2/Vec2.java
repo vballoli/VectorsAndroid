@@ -39,9 +39,9 @@ public class Vec2 extends Application {
         if (preferences.getBoolean(FIRST_TIME, true)) {
             Log.e(TAG, "onCreate: Build and copying only the first time" );
             transferFiles();
-            createDirectories();
             SharedPrefsUtils.setBooleanPreference(this, Constants.RESOLUTION_QUALITY, false);
         }
+        createDirectories();
         buildFFMpeg();
     }
 
@@ -120,7 +120,7 @@ public class Vec2 extends Application {
      * Creates required folders for the app
      */
     private void createDirectories () {
-        File movieFile = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MOVIES);
+        File movieFile = Environment.getExternalStorageDirectory();
         File mVideoFolder = new File(movieFile, "Vec2");
         if(!mVideoFolder.exists()) {
             mVideoFolder.mkdirs();

@@ -152,7 +152,7 @@ public class EncoderService extends IntentService {
     private void extractFile(String filename) {
         Log.e(TAG, "extractFile: Extracting ");
         String file_bin = filename + ".bin";
-        String videoName = filename +  "_video.bin";
+        String videoName = filename;
         String extractCommand = Constants.EXTRACT_ADD_LS + " " + file_bin + " " + videoName + " 5 2";
         CommandResult extractResult = Shell.SH.run(extractCommand);
         if (extractResult.isSuccessful()) {
