@@ -76,7 +76,7 @@ public class ReceiverActivity extends AppCompatActivity {
         Collections.sort(sequencesList);
         Log.e(TAG, "displayRows: "+ sequencesList);
         int factor = 5;
-        for (int i = 1; i <= sequencesList.get(sequencesList.size()-1); i += 0) {
+        for (int i = 1; i < sequencesList.get(sequencesList.size()-1); i += 0) {
             TableRow tb = new TableRow(this);
             tb.setLayoutParams(tableLayout.getLayoutParams());
             TextView nRange = new TextView(this);

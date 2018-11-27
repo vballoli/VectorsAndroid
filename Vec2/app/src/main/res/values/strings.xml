@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Vec2</string>
+    <string name="app_name">OVS-SVC</string>
     <string name="permission_request">permission request</string>
     <string name="camera_error">camera error</string>
     <string name="stop">stop</string>
